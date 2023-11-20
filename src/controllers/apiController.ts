@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { User } from '../models/User';
+import { generateToken } from '../config/passport';
 
 export const ping = (req: Request, res: Response) => {
     res.json({pong: true});
@@ -33,7 +34,8 @@ export const login = async (req: Request, res: Response) => {
         });
 
         if(user) {
-            res.json({ status: true });
+            const token = generateToken({ id: user.id })
+            res.json({ status: true, token });
             return;
         }
     }
