@@ -13,9 +13,9 @@ export const register = async (req: Request, res: Response) => {
         let hasUser = await User.findOne({where: { email }});
         if(!hasUser) {
             let newUser = await User.create({ email, password });
-
+            const token = generateToken({ id: newUser.id })
             res.status(201);
-            res.json({ id: newUser.id });
+            res.json({ id: newUser.id, token });
         } else {
             res.json({ error: 'E-mail já existe.' });
         }
