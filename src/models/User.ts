@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../instances/pg';
+import { sequelize } from '../instances/mysql';
 
 export interface UserInstance extends Model {
     id: number;
